@@ -1,0 +1,38 @@
+<div class="filter-container container">  
+  
+  <form *ngIf="displaySettings else empty">
+    <div class="form-group">
+
+      <label for="sel-color">Select map color:</label>
+      <select #selColor="ngModel" class="form-control" 
+        id="sel-color" name="selColor"
+        [(ngModel)]="displaySettingsFilter.Background">
+
+          <option [value]="background" *ngFor="let background of displaySettings.Backgrounds">{{background}}</option>      
+        </select>
+      <br>
+
+      <label for="sel-sensors">Select sensors (hold shift to select more than one):</label>
+      <select multiple #selSensors="ngModel" class="form-control" 
+        id="sel-sensors" name="selSensors" 
+        [(ngModel)]="displaySettingsFilter.Sensor"
+        (ngModelChange)="refreshForm($event)">
+
+        <option value="">All</option> 
+        <option [value]="sensor" *ngFor="let sensor of displaySettings.Sensors">{{sensor}}</option>        
+      </select>
+    </div>
+  </form>
+
+<div #mapContainer class="map-container" 
+  [ngStyle]="displaySettingsFilter && {'background-color': displaySettingsFilter.Background}"> 
+
+  <div *ngFor="let imageData of imagesData">
+      <div class="img-wrapper" [ngStyle]="styleImageLocation(imageData)" >          
+        <img class="cld-responsive" data-src="{{imageData.srcUrl}}" alt="{{imageData.name}}">        
+      </div>
+  </div>
+
+</div>
+
+<ng-template #empty> Loading... </ng-template>
