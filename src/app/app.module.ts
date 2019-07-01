@@ -5,16 +5,19 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MapImagesComponent } from './map-images/map-images.component';
 import { MapImagesService } from './map-images.service';
-import { FormsModule} from '@angular/forms';
+import { MapImageDataResponsiveComponent } from './map-image-data-responsive/map-image-data-responsive.component';
 
+import { FormsModule} from '@angular/forms';
 import {CloudinaryModule} from '@cloudinary/angular-5.x';
 import cloudinaryConfiguration from './config-cloudinary';
 import * as cloudinary from 'cloudinary-core';
 
+
 @NgModule({
   declarations: [
     AppComponent,
-    MapImagesComponent
+    MapImagesComponent,
+    MapImageDataResponsiveComponent
   ],
   imports: [
     BrowserModule,

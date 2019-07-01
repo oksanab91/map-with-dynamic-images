@@ -1,0 +1,13 @@
+.img-wrapper {
+    position: absolute;
+    max-width: auto;
+    max-height: 450px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;     
+}
+
+.img-wrapper img {    
+    width: 100%;
+    height: auto;
+}

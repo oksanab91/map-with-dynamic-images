@@ -28,9 +28,7 @@
   [ngStyle]="displaySettingsFilter && {'background-color': displaySettingsFilter.Background}"> 
 
   <div *ngFor="let imageData of imagesData">
-      <div class="img-wrapper" [ngStyle]="styleImageLocation(imageData)" >          
-        <img class="cld-responsive" data-src="{{imageData.srcUrl}}" alt="{{imageData.name}}">        
-      </div>
+    <map-image-data-responsive [image-data]="imageData"></map-image-data-responsive>
   </div>
 
 </div>
