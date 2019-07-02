@@ -26,8 +26,7 @@ export class MapImagesComponent {
       this.displaySettingsFilter = result['display-settings'];
       
       this.getDisplaySettingsAll().subscribe(setting => {
-        console.log(setting);
-
+        
         this.displaySettings = setting;   
         if(this.displaySettingsFilter){
           this.getImages();
