@@ -1,6 +1,6 @@
 {
 	"display-settings": {
-		"Sensor": ["OGEN", "IKONOS"],
-		"Background": "Blue"
+		"sensor": ["OGEN", "IKONOS"],
+		"background": "Blue"
 	}
 }

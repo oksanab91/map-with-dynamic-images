@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { ImageData } from '../models/image-data';
 import { HttpErrorResponse } from '@angular/common/http';
-import { environment } from '../../environments/environment';
 import { MapImagesService } from '../map-images.service';
 import { DispalySettingsFilter, DispalySettingsJson, DispalySettings } from '../models/dispaly-settings';
 import { Observable } from 'rxjs';
@@ -19,33 +18,36 @@ const mapContainerWidth = 1460;
 export class MapImagesComponent {  
   imagesData: ImageData[] = [];
   displaySettings: DispalySettings;
-  displaySettingsFilter: DispalySettingsFilter;  
-  getUrl: string;  
+  displaySettingsFilter: DispalySettingsFilter;
 
-  constructor(private mapImagesService: MapImagesService, private cloudinary: Cloudinary) {
-    this.getUrl = `${environment.apiUrl}images`;
+  constructor(private mapImagesService: MapImagesService, private cloudinary: Cloudinary) {    
     
-    this.getDyspalySettingsStart().subscribe(result =>{
+    this.getDispalySettingsStart().subscribe(result =>{
       this.displaySettingsFilter = result['display-settings'];
-      this.displaySettings = this.getDisplaySettingsAll();
+      
+      this.getDisplaySettingsAll().subscribe(setting => {
+        console.log(setting);
 
-      if(this.displaySettingsFilter){
-        this.getImages();        
-      }      
+        this.displaySettings = setting;   
+        if(this.displaySettingsFilter){
+          this.getImages();
+        }        
+        }
+      ); 
     });
 
    }   
 
-   getDyspalySettingsStart(): Observable<DispalySettingsJson> {    
+   getDispalySettingsStart(): Observable<DispalySettingsJson> {    
     return this.mapImagesService.getDisplaySettingsStart();     
    }
 
-   getDisplaySettingsAll() {
+   getDisplaySettingsAll(): Observable<DispalySettings> {
     return this.mapImagesService.getDisplaySettingsAll();
    }
 
    getImages() {
-    this.mapImagesService.getImages(this.displaySettingsFilter.Sensor).subscribe(result => {
+    this.mapImagesService.getImages(this.displaySettingsFilter.sensor).subscribe(result => {
       this.imagesData = result;
       this.setImagesLocationsXY();
 
@@ -54,19 +56,16 @@ export class MapImagesComponent {
           return;
         }
       });
+      
   }
 
   refreshForm(event) {
-    const indexAll = this.displaySettingsFilter.Sensor.indexOf('');
+    const indexAll = this.displaySettingsFilter.sensor.indexOf('');
 
     if(indexAll>0){
-      this.displaySettingsFilter.Sensor = this.displaySettingsFilter.Sensor.slice(indexAll, indexAll);
+      this.displaySettingsFilter.sensor = this.displaySettingsFilter.sensor.slice(indexAll, indexAll);
     }
     this.getImages();
-  }
-
-  styleImageLocation(image: ImageData): Object {
-    return {left: `${image.xResponsive}%`, top: `${image.yResponsive}%`};
   }
 
   setImagesLocationsXY(): void {

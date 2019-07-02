@@ -1,6 +1,6 @@
 export class DispalySettingsFilter {
-    Background: string;
-    Sensor: string[];
+    background: string;
+    sensor: string[];
 }
 
 export class DispalySettingsJson {
@@ -8,6 +8,6 @@ export class DispalySettingsJson {
 }
 
 export class DispalySettings {
-    Backgrounds: string[];
-    Sensors: string[];
+    backgrounds: string[];
+    sensors: string[];
 }
