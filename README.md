@@ -1,7 +1,7 @@
-# Dynamic Map
+# Dynamic Map Angular SPA
 
-This is a Single Page responsive Application that displays images based on a user settings.
-The user can change display settings using the UI, and the map is updated dynamically.
+This is a Single Page responsive Application that displays images based on a user settings.<br>
+The user can change display settings using the UI, and the map is updated dynamically.<br><br>
 
 
 ## Client-side
